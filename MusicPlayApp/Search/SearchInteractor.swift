@@ -16,6 +16,7 @@ class SearchInteractor: SearchBusinessLogic {
     
     var presenter: SearchPresentationLogic?
     var service: SearchService?
+    var networkService: NetworkService?
     
     func makeRequest(request: Search.Model.Request.RequestType) {
         if service == nil {
@@ -25,9 +26,11 @@ class SearchInteractor: SearchBusinessLogic {
         switch request {
         case .some:
             print("interactor some case")
-        case .getTracks:
+        case .getTracks(let searchTerm):
             print("interactor get tracks")
-            presenter?.presentData(response: Search.Model.Response.ResponseType.presentTracks)
+            networkService?.fetchTracks(searchText: searchTerm, completion: { [weak self] searchResponse in
+                self?.presenter?.presentData(response: Search.Model.Response.ResponseType.presentTracks(searchResponse: searchResponse))
+            })
         }
     }
     

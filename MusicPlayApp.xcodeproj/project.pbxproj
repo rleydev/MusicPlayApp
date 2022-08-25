@@ -80,8 +80,8 @@
 		97C7362528B61B3E006FC9B5 /* MusicPlayApp */ = {
 			isa = PBXGroup;
 			children = (
-				97D51D5728B7505F007167CE /* Search */,
 				97C7363A28B61BD7006FC9B5 /* MainTabBar.swift */,
+				97D51D5728B7505F007167CE /* Search */,
 				97D51D7928B754BC007167CE /* Helpers */,
 				97C7363E28B61CBF006FC9B5 /* SearchMusicView.swift */,
 				97C7362A28B61B3E006FC9B5 /* ViewController.swift */,
