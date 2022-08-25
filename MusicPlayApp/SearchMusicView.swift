@@ -13,7 +13,7 @@ struct TrackModel {
     var artistName: String
 }
 
-class SearchView: UITableViewController {
+class SearchMusicView: UITableViewController {
     
     var networkService = NetworkService()
     
@@ -53,7 +53,7 @@ class SearchView: UITableViewController {
     }
 }
 
-extension SearchView: UISearchBarDelegate {
+extension SearchMusicView: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
