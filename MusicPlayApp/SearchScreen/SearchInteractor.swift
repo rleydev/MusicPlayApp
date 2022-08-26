@@ -12,7 +12,7 @@ protocol SearchBusinessLogic {
     func makeRequest(request: Search.Model.Request.RequestType)
 }
 
-class SearchInteractor: SearchBusinessLogic {
+final class SearchInteractor: SearchBusinessLogic {
     
     var presenter: SearchPresentationLogic?
     var service: SearchService?

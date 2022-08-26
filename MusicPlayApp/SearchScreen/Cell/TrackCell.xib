@@ -43,6 +43,7 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="artistNameLabel" destination="yU9-2g-FZn" id="wLf-gD-T5A"/>
                 <outlet property="collectionNameLabel" destination="ia9-RW-EgY" id="ys1-Cm-ckC"/>

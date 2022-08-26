@@ -15,14 +15,14 @@ protocol TrackCellViewModel {
     var collectionName: String { get }
 }
 
-class TrackCell: UITableViewCell {
+final class TrackCell: UITableViewCell {
     
     static let reuseId = "TrackCell"
     
-    @IBOutlet var trackImageView: UIImageView!
-    @IBOutlet var trackNameLabel: UILabel!
-    @IBOutlet var artistNameLabel: UILabel!
-    @IBOutlet var collectionNameLabel: UILabel!
+    @IBOutlet private var trackImageView: UIImageView!
+    @IBOutlet private var trackNameLabel: UILabel!
+    @IBOutlet private var artistNameLabel: UILabel!
+    @IBOutlet private var collectionNameLabel: UILabel!
     
     override class func awakeFromNib() {
         super.awakeFromNib()
