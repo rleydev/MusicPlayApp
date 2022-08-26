@@ -29,13 +29,34 @@ final class TrackDetailedView: UIView {
         return avplayer
     }()
     
+    let imageScale: CGFloat = 0.8
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setUpButtonsAppearance()
-       
-        trackImageView.backgroundColor = .red
+        trackImageView.transform = CGAffineTransform(scaleX: imageScale, y: imageScale)
+        trackImageView.layer.cornerRadius = 5
         
+    }
+    
+    private func monitorStartTime() {
+        let time = CMTimeMake(value: 1, timescale: 3)
+        let times = [NSValue(time: time)]
+        player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
+            self?.enlargeTrackImageView()
+        }
+    }
+    
+    private func enlargeTrackImageView() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.trackImageView.transform = .identity
+        }, completion: nil)
+    }
+    
+    private func reduceTrackImageView() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.trackImageView.transform = CGAffineTransform(scaleX: self.imageScale, y: self.imageScale)
+        }, completion: nil)
     }
     
     private func setUpButtonsAppearance() {
@@ -51,7 +72,8 @@ final class TrackDetailedView: UIView {
         let string600 = viewModel.iconUrlString?.replacingOccurrences(of: "100x100", with: "600x600")
         guard let url = URL(string: string600 ?? "") else { return }
         trackImageView.sd_setImage(with: url, completed: nil)
-        
+        setUpButtonsAppearance()
+        monitorStartTime()
     }
     
     private func playTrack(previewUrl: String?) {
@@ -88,9 +110,11 @@ final class TrackDetailedView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+            enlargeTrackImageView()
         } else {
             player.pause()
             playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+            reduceTrackImageView()
         }
     }
 }
