@@ -47,6 +47,17 @@ final class TrackDetailedView: UIView {
         }
     }
     
+    private func observePlayerCurrentTime() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            self?.currentTimeLabel.text = time.toDisplayString()
+            
+            let durationTime = self?.player.currentItem?.duration
+            let currentDurationTimeText = ((durationTime ?? CMTimeMake(value: 1, timescale: 1)) - time).toDisplayString()
+            self?.durationLabel.text = "-\(currentDurationTimeText)"
+        }
+    }
+    
     private func enlargeTrackImageView() {
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.trackImageView.transform = .identity
@@ -74,6 +85,7 @@ final class TrackDetailedView: UIView {
         trackImageView.sd_setImage(with: url, completed: nil)
         setUpButtonsAppearance()
         monitorStartTime()
+        observePlayerCurrentTime()
     }
     
     private func playTrack(previewUrl: String?) {
@@ -82,6 +94,7 @@ final class TrackDetailedView: UIView {
         guard let previewUrl = URL(string: previewUrl ?? "") else {
             return
         }
+        
         let playerItem = AVPlayerItem(url: previewUrl)
         player.replaceCurrentItem(with: playerItem)
         player.play()
