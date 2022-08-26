@@ -9,6 +9,11 @@ import UIKit
 import SDWebImage
 import AVKit
 
+protocol TrackMovingDelegate: AnyObject {
+    func moveBackForPreviousTrack() -> SearchViewModel.Cell?
+    func moveForwardForPreviousTrack() -> SearchViewModel.Cell?
+}
+
 final class TrackDetailedView: UIView {
     
     @IBOutlet private var trackImageView: UIImageView!
@@ -28,6 +33,8 @@ final class TrackDetailedView: UIView {
         avplayer.automaticallyWaitsToMinimizeStalling = false
         return avplayer
     }()
+    
+    weak var delegate: TrackMovingDelegate?
     
     let imageScale: CGFloat = 0.8
     
@@ -126,10 +133,18 @@ final class TrackDetailedView: UIView {
         player.volume = volumeSlider.value
     }
     @IBAction func previousTrackButtonTapped(_ sender: Any) {
-        
+        let cellViewModel = delegate?.moveBackForPreviousTrack()
+        guard let cellViewModel = cellViewModel else {
+            return
+        }
+        self.set(viewModel: cellViewModel)
     }
     @IBAction func nextTrackButtonTapped(_ sender: Any) {
-        
+        let cellViewModel = delegate?.moveForwardForPreviousTrack()
+        guard let cellViewModel = cellViewModel else {
+            return
+        }
+        self.set(viewModel: cellViewModel)
     }
     
     @IBAction func playPauseButtonTapped(_ sender: Any) {
