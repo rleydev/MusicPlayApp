@@ -41,7 +41,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     // MARK: Routing
     
     
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -109,6 +108,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return searchViewModel.cells.count > 0 ? 0 : 250
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellViewModel = searchViewModel.cells[indexPath.row]
+        print(cellViewModel.trackName)
+        
+        let window = UIApplication.shared.keyWindow
+        let trackDetailedView = Bundle.main.loadNibNamed("TrackDetailedView", owner: self, options: nil)?.first as! TrackDetailedView
+        window?.addSubview(trackDetailedView)
     }
 }
 
