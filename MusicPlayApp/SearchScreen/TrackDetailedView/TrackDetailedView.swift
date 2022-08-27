@@ -16,6 +16,14 @@ protocol TrackMovingDelegate: AnyObject {
 
 final class TrackDetailedView: UIView {
     
+    @IBOutlet var miniTrackView: UIView!
+    @IBOutlet var miniGoForwardButton: UIButton!
+    @IBOutlet var maximizedStackView: UIStackView!
+    @IBOutlet var miniTrackImageView: UIImageView!
+    @IBOutlet var miniTrackTitleLabel: UILabel!
+    @IBOutlet var miniPlayPauseButton: UIButton!
+    
+    
     @IBOutlet var trackImageView: UIImageView!
     @IBOutlet private var currentTimeSlider: UISlider!
     @IBOutlet private var currentTimeLabel: UILabel!
@@ -84,15 +92,22 @@ final class TrackDetailedView: UIView {
     }
     
     func set(viewModel: SearchViewModel.Cell) {
+        miniTrackTitleLabel.text = viewModel.trackName
+        
         trackTitleLabel.text = viewModel.trackName
         authorTitleLabel.text = viewModel.artistName
         playTrack(previewUrl: viewModel.previewUrl)
         let string600 = viewModel.iconUrlString?.replacingOccurrences(of: "100x100", with: "600x600")
+        
         guard let url = URL(string: string600 ?? "") else { return }
+        
+        miniTrackImageView.sd_setImage(with: url, completed: nil)
+        
         trackImageView.sd_setImage(with: url, completed: nil)
         monitorStartTime()
         observePlayerCurrentTime()
         playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+        miniPlayPauseButton.setImage(UIImage(named: "pause"), for: .normal)
     }
     
     private func playTrack(previewUrl: String?) {
@@ -145,10 +160,12 @@ final class TrackDetailedView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+            miniPlayPauseButton.setImage(UIImage(named: "pause"), for: .normal)
             enlargeTrackImageView()
         } else {
             player.pause()
             playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+            miniPlayPauseButton.setImage(UIImage(named: "play"), for: .normal)
             reduceTrackImageView()
         }
     }

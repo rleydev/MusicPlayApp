@@ -86,6 +86,8 @@ extension MainTabBar: MainTabBarDelegate {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
             self.tabBar.alpha = 1
+            self.trackDetailedView.miniTrackView.alpha = 1
+            self.trackDetailedView.maximizedStackView.alpha = 0
         }, completion: nil)
         
         trackDetailedView.trackImageView.alpha = 0
@@ -101,6 +103,8 @@ extension MainTabBar: MainTabBarDelegate {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
             self.tabBar.alpha = 0
+            self.trackDetailedView.miniTrackView.alpha = 0
+            self.trackDetailedView.maximizedStackView.alpha = 1
         }, completion: nil)
         
         guard let viewModel = viewModel else { return }
