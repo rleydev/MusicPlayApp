@@ -35,6 +35,7 @@ final class TrackDetailedView: UIView {
     }()
     
     weak var delegate: TrackMovingDelegate?
+    weak var tabBarDelegate: MainTabBarDelegate?
     
     let imageScale: CGFloat = 0.8
     
@@ -116,8 +117,8 @@ final class TrackDetailedView: UIView {
     }
     
     @IBAction func dragDownButtonTapped(_ sender: Any) {
-        
-        self.removeFromSuperview()
+        self.tabBarDelegate?.minimizeTrackDetailedController()
+//        self.removeFromSuperview()
     }
     
     @IBAction func handleCurrentTimerSlider(_ sender: Any) {
@@ -132,6 +133,7 @@ final class TrackDetailedView: UIView {
     @IBAction func handleVolumeSlider(_ sender: Any) {
         player.volume = volumeSlider.value
     }
+    
     @IBAction func previousTrackButtonTapped(_ sender: Any) {
         let cellViewModel = delegate?.moveBackForPreviousTrack()
         guard let cellViewModel = cellViewModel else {
@@ -139,6 +141,7 @@ final class TrackDetailedView: UIView {
         }
         self.set(viewModel: cellViewModel)
     }
+    
     @IBAction func nextTrackButtonTapped(_ sender: Any) {
         let cellViewModel = delegate?.moveForwardForPreviousTrack()
         guard let cellViewModel = cellViewModel else {
