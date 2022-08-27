@@ -87,6 +87,8 @@ extension MainTabBar: MainTabBarDelegate {
             self.view.layoutIfNeeded()
             self.tabBar.alpha = 1
         }, completion: nil)
+        
+        trackDetailedView.trackImageView.alpha = 0
 
     }
     
@@ -103,5 +105,7 @@ extension MainTabBar: MainTabBarDelegate {
         
         guard let viewModel = viewModel else { return }
         self.trackDetailedView.set(viewModel: viewModel)
+        
+        trackDetailedView.trackImageView.alpha = 1
     }
 }

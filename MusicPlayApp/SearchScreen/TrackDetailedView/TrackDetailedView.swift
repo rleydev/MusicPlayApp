@@ -16,7 +16,7 @@ protocol TrackMovingDelegate: AnyObject {
 
 final class TrackDetailedView: UIView {
     
-    @IBOutlet private var trackImageView: UIImageView!
+    @IBOutlet var trackImageView: UIImageView!
     @IBOutlet private var currentTimeSlider: UISlider!
     @IBOutlet private var currentTimeLabel: UILabel!
     @IBOutlet private var durationLabel: UILabel!
@@ -92,6 +92,7 @@ final class TrackDetailedView: UIView {
         trackImageView.sd_setImage(with: url, completed: nil)
         monitorStartTime()
         observePlayerCurrentTime()
+        playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
     }
     
     private func playTrack(previewUrl: String?) {
