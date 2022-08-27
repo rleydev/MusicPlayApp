@@ -12,17 +12,19 @@ protocol SearchDisplayLogic: AnyObject {
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData)
 }
 
-class SearchViewController: UIViewController, SearchDisplayLogic {
+final class SearchViewController: UIViewController, SearchDisplayLogic {
     
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic)?
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchViewModel = SearchViewModel.init(cells: [])
     private var timer: Timer?
     private lazy var footerView = FooterView()
+    
+    weak var tabBarDelegate: MainTabBarDelegate?
     
     // MARK: Setup
     
@@ -41,7 +43,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     // MARK: Routing
     
     
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -49,6 +50,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         setup()
         setUpSearchBar()
         setUpTableView()
+        searchBar(searchController.searchBar, textDidChange: "Imagine Dragons")
     }
     
     private func setUpSearchBar() {
@@ -110,6 +112,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return searchViewModel.cells.count > 0 ? 0 : 250
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellViewModel = searchViewModel.cells[indexPath.row]
+        print(cellViewModel.trackName)
+        
+        self.tabBarDelegate?.maximizeTrackDetailedController(viewModel: cellViewModel)
+    }
 }
 
 // MARK: UISearchBarDelegate
@@ -126,3 +135,38 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+extension SearchViewController: TrackMovingDelegate {
+    
+    private func getTrack(isForwardTrack: Bool) -> SearchViewModel.Cell? {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+        tableView.deselectRow(at: indexPath, animated: true)
+        var nextIndexPath: IndexPath!
+        
+        if isForwardTrack {
+            nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            if nextIndexPath.row == searchViewModel.cells.count {
+                nextIndexPath.row = 0
+            }
+        } else {
+            nextIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+            if nextIndexPath.row == -1 {
+                nextIndexPath.row = searchViewModel.cells.count - 1
+            }
+        }
+        
+        tableView.selectRow(at: nextIndexPath, animated: true, scrollPosition: .none)
+        let cellViewModel = searchViewModel.cells[nextIndexPath.row]
+        
+        print("cellvmodel track \(cellViewModel.trackName)")
+        
+        return cellViewModel
+    }
+    
+    func moveBackForPreviousTrack() -> SearchViewModel.Cell? {
+        return getTrack(isForwardTrack: false)
+    }
+    
+    func moveForwardForPreviousTrack() -> SearchViewModel.Cell? {
+        return getTrack(isForwardTrack: true)
+    }
+}
