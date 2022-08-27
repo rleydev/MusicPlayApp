@@ -34,6 +34,8 @@
 		97DE50EE28B8DC8E0025650D /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE50ED28B8DC8E0025650D /* CMTime+Extension.swift */; };
 		97DE50F028B8E97B0025650D /* nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE50EF28B8E97B0025650D /* nib.swift */; };
 		97F8217828BA190500007EDD /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F8217728BA190500007EDD /* Library.swift */; };
+		97F8217A28BA2B3500007EDD /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F8217928BA2B3500007EDD /* UserDefaults.swift */; };
+		97F8217D28BA301C00007EDD /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 97F8217C28BA301C00007EDD /* URLImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,7 @@
 		97DE50ED28B8DC8E0025650D /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
 		97DE50EF28B8E97B0025650D /* nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nib.swift; sourceTree = "<group>"; };
 		97F8217728BA190500007EDD /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		97F8217928BA2B3500007EDD /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97D51D8328B7865E007167CE /* SDWebImage in Frameworks */,
+				97F8217D28BA301C00007EDD /* URLImage in Frameworks */,
 				97C7364428B63849006FC9B5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +175,7 @@
 			children = (
 				97D51D7D28B77565007167CE /* TrackCell.xib */,
 				97D51D7F28B7757C007167CE /* TrackCell.swift */,
+				97F8217928BA2B3500007EDD /* UserDefaults.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			packageProductDependencies = (
 				97C7364328B63849006FC9B5 /* Alamofire */,
 				97D51D8228B7865E007167CE /* SDWebImage */,
+				97F8217C28BA301C00007EDD /* URLImage */,
 			);
 			productName = MusicPlayApp;
 			productReference = 97C7362328B61B3E006FC9B5 /* MusicPlayApp.app */;
@@ -243,6 +249,7 @@
 			packageReferences = (
 				97C7364228B63849006FC9B5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				97D51D8128B7865E007167CE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				97F8217B28BA301C00007EDD /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 97C7362428B61B3E006FC9B5 /* Products */;
 			projectDirPath = "";
@@ -278,6 +285,7 @@
 				97C7363B28B61BD7006FC9B5 /* MainTabBar.swift in Sources */,
 				97D51D5428B73DF5007167CE /* SearchResponse.swift in Sources */,
 				97DE50EC28B8AB400025650D /* TrackDetailedView.swift in Sources */,
+				97F8217A28BA2B3500007EDD /* UserDefaults.swift in Sources */,
 				97DE50EE28B8DC8E0025650D /* CMTime+Extension.swift in Sources */,
 				97D51D7328B7516D007167CE /* SearchInteractor.swift in Sources */,
 				97C7362B28B61B3E006FC9B5 /* ViewController.swift in Sources */,
@@ -520,6 +528,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		97F8217B28BA301C00007EDD /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -532,6 +548,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 97D51D8128B7865E007167CE /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		97F8217C28BA301C00007EDD /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97F8217B28BA301C00007EDD /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

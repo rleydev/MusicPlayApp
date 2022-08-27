@@ -46,8 +46,8 @@
                         <rect key="frame" x="374" y="34" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="tintColor" name="tint_pink"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="add"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Button" image="add"/>
                         <connections>
                             <action selector="addFavoriteTrackTapped:" destination="T2a-2v-krb" eventType="touchUpInside" id="9fx-ne-bd7"/>
                         </connections>
@@ -56,6 +56,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="addTrackButton" destination="hJD-df-CF3" id="jeU-8s-jgw"/>
                 <outlet property="artistNameLabel" destination="yU9-2g-FZn" id="wLf-gD-T5A"/>
                 <outlet property="collectionNameLabel" destination="ia9-RW-EgY" id="ys1-Cm-ckC"/>
                 <outlet property="trackImageView" destination="AXY-pU-bGA" id="TtA-mz-0tk"/>

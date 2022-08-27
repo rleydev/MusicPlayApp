@@ -36,8 +36,9 @@ class SearchViewModel: NSObject, NSCoding {
     
     let cells: [Cell]
     
-    @objc(_TtCC12MusicPlayApp15SearchViewModel4Cell)class Cell: NSObject, NSCoding {
+    @objc(_TtCC12MusicPlayApp15SearchViewModel4Cell)class Cell: NSObject, NSCoding, Identifiable {
         
+        var id = UUID()
         var iconUrlString: String?
         var trackName: String
         var artistName: String
