@@ -18,6 +18,7 @@ protocol TrackCellViewModel {
 final class TrackCell: UITableViewCell {
     
     static let reuseId = "TrackCell"
+    var cell: SearchViewModel.Cell?
     
     @IBOutlet private var trackImageView: UIImageView!
     @IBOutlet private var trackNameLabel: UILabel!
@@ -34,7 +35,9 @@ final class TrackCell: UITableViewCell {
         trackImageView.image = nil
     }
     
-    func set(viewModel: TrackCellViewModel) {
+    func set(viewModel: SearchViewModel.Cell) {
+        self.cell = viewModel
+        
         trackNameLabel.text = viewModel.trackName
         artistNameLabel.text = viewModel.artistName
         collectionNameLabel.text = viewModel.collectionName
@@ -42,4 +45,15 @@ final class TrackCell: UITableViewCell {
         guard let url = URL(string: viewModel.iconUrlString ?? "") else { return }
         trackImageView.sd_setImage(with: url, completed: nil)
     }
+    
+    @IBAction func addFavoriteTrackTapped(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cell, requiringSecureCoding: false) {
+            
+            defaults.set(savedData, forKey: "myTracks")
+            print("track added to fav sucessfully")
+        }
+    }
+    
 }

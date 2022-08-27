@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,6 +42,16 @@
                         <color key="textColor" red="0.4941176471" green="0.4941176471" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJD-df-CF3">
+                        <rect key="frame" x="374" y="34" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" name="tint_pink"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="add"/>
+                        <connections>
+                            <action selector="addFavoriteTrackTapped:" destination="T2a-2v-krb" eventType="touchUpInside" id="9fx-ne-bd7"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -53,4 +64,10 @@
             <point key="canvasLocation" x="-189.85507246376812" y="-52.232142857142854"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="add" width="16" height="16"/>
+        <namedColor name="tint_pink">
+            <color red="1" green="0.0" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
