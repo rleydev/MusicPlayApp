@@ -25,9 +25,6 @@ final class TrackDetailedView: UIView {
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet private var volumeSlider: UISlider!
     
-    @IBOutlet var previousTrackButton: UIButton!
-    @IBOutlet var nextTrackButton: UIButton!
-    
     let player: AVPlayer = {
         let avplayer = AVPlayer()
         avplayer.automaticallyWaitsToMinimizeStalling = false

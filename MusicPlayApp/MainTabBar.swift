@@ -69,9 +69,9 @@ class MainTabBar: UITabBarController {
             trackDetailedView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
-        trackDetailedView.previousTrackButton.titleLabel?.text = nil
-        trackDetailedView.nextTrackButton.titleLabel?.text = nil
-        trackDetailedView.playPauseButton.titleLabel?.text = nil
+//        trackDetailedView.previousTrackButton.titleLabel?.text = nil
+//        trackDetailedView.nextTrackButton.titleLabel?.text = nil
+//        trackDetailedView.playPauseButton.titleLabel?.text = nil
 
     }
 }
