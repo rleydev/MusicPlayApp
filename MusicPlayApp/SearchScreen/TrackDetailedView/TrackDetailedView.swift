@@ -98,6 +98,7 @@ final class TrackDetailedView: UIView {
     private func setUpGestures() {
         miniTrackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximized)))
         miniTrackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanMaximized)))
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissingPan)))
     }
     
     private func playTrack(previewUrl: String?) {
@@ -138,6 +139,32 @@ final class TrackDetailedView: UIView {
         }, completion: nil)
     }
     
+    private func handleDissmisingPanChanged(gesture: UIPanGestureRecognizer) {
+        let traslation = gesture.translation(in: self.superview)
+        maximizedStackView.transform = CGAffineTransform(translationX: 0, y: traslation.y)
+    }
+    
+    private func handleDissmisingPanEnded(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self.superview)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maximizedStackView.transform = .identity
+            if translation.y > 50 {
+                self.tabBarDelegate?.minimizeTrackDetailedController()
+            }
+        }, completion: nil)
+    }
+    
+    @objc private func handleDismissingPan(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            handleDissmisingPanChanged(gesture: gesture)
+        case .ended:
+            handleDissmisingPanEnded(gesture: gesture)
+        @unknown default:
+            print("default")
+        }
+    }
+    
     @objc private func handleTapMaximized() {
         self.tabBarDelegate?.maximizeTrackDetailedController(viewModel: nil)
     }
@@ -145,8 +172,6 @@ final class TrackDetailedView: UIView {
     @objc private func handlePanMaximized(gesture: UIPanGestureRecognizer) {
         
         switch gesture.state {
-        case .began:
-            print("pan began")
         case .changed:
             handlePanChanged(gesture: gesture)
         case .ended:
