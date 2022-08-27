@@ -14,7 +14,8 @@ class FooterView: UIView {
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(red: 162/255, green: 165/255, blue: 269/255, alpha: 1)
+//        label.textColor = UIColor(red: 162/255, green: 165/255, blue: 269/255, alpha: 1)
+        label.textColor = .black
         return label
     }()
     

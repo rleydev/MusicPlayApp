@@ -22,7 +22,7 @@ final class TrackDetailedView: UIView {
     @IBOutlet private var durationLabel: UILabel!
     @IBOutlet private var trackTitleLabel: UILabel!
     @IBOutlet private var authorTitleLabel: UILabel!
-    @IBOutlet private var playPauseButton: UIButton!
+    @IBOutlet var playPauseButton: UIButton!
     @IBOutlet private var volumeSlider: UISlider!
     
     @IBOutlet var previousTrackButton: UIButton!
@@ -86,12 +86,6 @@ final class TrackDetailedView: UIView {
         }, completion: nil)
     }
     
-    private func setUpButtonsAppearance() {
-        previousTrackButton.setTitle(nil, for: .normal)
-        nextTrackButton.setTitle(nil, for: .normal)
-        playPauseButton.setTitle(nil, for: .normal)
-    }
-    
     func set(viewModel: SearchViewModel.Cell) {
         trackTitleLabel.text = viewModel.trackName
         authorTitleLabel.text = viewModel.artistName
@@ -99,7 +93,6 @@ final class TrackDetailedView: UIView {
         let string600 = viewModel.iconUrlString?.replacingOccurrences(of: "100x100", with: "600x600")
         guard let url = URL(string: string600 ?? "") else { return }
         trackImageView.sd_setImage(with: url, completed: nil)
-        setUpButtonsAppearance()
         monitorStartTime()
         observePlayerCurrentTime()
     }
