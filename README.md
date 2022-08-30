@@ -1,4 +1,4 @@
-# MusicPlay App
+# MusicPlay iOS Application
 <br />
     <p align="center">
         iOS pet project application for searching and listening music
