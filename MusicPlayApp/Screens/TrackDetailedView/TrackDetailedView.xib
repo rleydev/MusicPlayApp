@@ -65,7 +65,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="eEn-zc-ht0" secondAttribute="bottom" constant="8" id="1T2-h5-93q"/>
                         <constraint firstAttribute="trailing" secondItem="Dlk-Ek-KrC" secondAttribute="trailing" id="3D6-2d-9ru"/>
@@ -202,7 +202,7 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="b0t-RC-E5h"/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="3MZ-jz-azG" firstAttribute="top" secondItem="b0t-RC-E5h" secondAttribute="top" id="09T-EP-yX1"/>
                 <constraint firstItem="rtx-uu-K3U" firstAttribute="top" secondItem="b0t-RC-E5h" secondAttribute="top" id="CkJ-5n-VE6"/>
