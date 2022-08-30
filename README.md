@@ -14,6 +14,7 @@
 <img src= "Screenshots/Preview2.gif" width="250">
 <img src= "Screenshots/Preview3.gif" width="250">
 </p>
+
 ## Requirements
 - IPhone 11+
 - iOS 13.0+
