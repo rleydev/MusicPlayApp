@@ -59,13 +59,23 @@ struct Library: View {
                             }
                                     .simultaneously(with: TapGesture()
                                                         .onEnded{ _ in
+                                let keyWindow = UIApplication.shared.connectedScenes.filter({
+                                                                $0.activationState == .foregroundActive
+                                                            })
+                                                                .map({ $0 as? UIWindowScene})
+                                                                .compactMap({
+                                                                $0
+                                                            }).first?.windows.filter({ $0.isKeyWindow })
+                                                                .first
+                                let tabBarVC = keyWindow?.rootViewController as? MainTabBar
+                                tabBarVC?.trackDetailedView.delegate = self
+                                                            
                                 self.track = track
                                 self.tabBarDelegate?.maximizeTrackDetailedController(viewModel: self.track)
                             }))
                     }
                     .onDelete(perform: delete)
                 }
-//                .background(Color(UIColor.lightGray))
             }
             .actionSheet(isPresented: $showingAlert, content: {
                 ActionSheet(title: Text("Are you sure you want to delete this song?"), buttons: [.destructive(Text("Delete"), action: {
@@ -74,6 +84,7 @@ struct Library: View {
             })
             .navigationBarTitle("Library")
         }
+        .background(Color(UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)))
         
     }
     
@@ -122,5 +133,33 @@ struct LibraryCell: View {
 struct Library_Previews: PreviewProvider {
     static var previews: some View {
         Library()
+    }
+}
+
+extension Library: TrackMovingDelegate {
+    func moveBackForPreviousTrack() -> SearchViewModel.Cell? {
+        let index = tracks.firstIndex(of: track)
+        guard let currentIndex = index else { return nil }
+        var nextTrack: SearchViewModel.Cell
+        if currentIndex - 1 == -1 {
+            nextTrack = tracks[tracks.count - 1]
+        } else {
+            nextTrack = tracks[currentIndex - 1]
+        }
+        self.track = nextTrack
+        return nextTrack
+    }
+    
+    func moveForwardForPreviousTrack() -> SearchViewModel.Cell? {
+        let index = tracks.firstIndex(of: track)
+        guard let currentIndex = index else { return nil }
+        var nextTrack: SearchViewModel.Cell
+        if currentIndex + 1 == tracks.count {
+            nextTrack = tracks[0]
+        } else {
+            nextTrack = tracks[currentIndex + 1]
+        }
+        self.track = nextTrack
+        return nextTrack
     }
 }

@@ -26,22 +26,22 @@ class MainTabBar: UITabBarController {
         super.viewDidLoad()
         
         tabBar.tintColor = UIColor(named: "tint_pink")
-        tabBar.barTintColor = .lightGray
+        tabBar.barTintColor = .white
         
         searchVC.tabBarDelegate = self
+        searchVC.view.backgroundColor = .white
         
         var library = Library()
         library.tabBarDelegate = self
         let hostingViewController = UIHostingController(rootView: library)
         hostingViewController.tabBarItem.image = UIImage(named: "tabbar_library")
         hostingViewController.tabBarItem.title = "Library"
-//        hostingViewController.view.backgroundColor = .lightGray
+        hostingViewController.view.backgroundColor = .white
         
         viewControllers = [
             hostingViewController,
             generateViewController(rootViewController: searchVC, image: UIImage(named: "tabbar_search")!, title: "Search")
         ]
-        
         setUpTrackDetailedView()
     }
     
@@ -50,7 +50,6 @@ class MainTabBar: UITabBarController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.image = image
         navigationVC.tabBarItem.title = title
-        navigationVC.navigationBar.barTintColor = .lightGray
         rootViewController.navigationItem.title = title
         navigationVC.navigationBar.prefersLargeTitles = true
         
@@ -58,7 +57,7 @@ class MainTabBar: UITabBarController {
     }
     
     private func setUpTrackDetailedView() {
-        trackDetailedView.backgroundColor = .lightGray
+        trackDetailedView.backgroundColor = .white
         trackDetailedView.translatesAutoresizingMaskIntoConstraints = false
         trackDetailedView.tabBarDelegate = self
         trackDetailedView.delegate = searchVC
@@ -73,14 +72,9 @@ class MainTabBar: UITabBarController {
         NSLayoutConstraint.activate([
             bottomAnchorConstraint,
             maximizedTopAnchorConstraint,
-//            trackDetailedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             trackDetailedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             trackDetailedView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        
-//        trackDetailedView.previousTrackButton.titleLabel?.text = nil
-//        trackDetailedView.nextTrackButton.titleLabel?.text = nil
-//        trackDetailedView.playPauseButton.titleLabel?.text = nil
 
     }
 }

@@ -10,7 +10,7 @@ import SDWebImage
 import AVKit
 import SwiftUI
 
-protocol TrackMovingDelegate: AnyObject {
+protocol TrackMovingDelegate {
     func moveBackForPreviousTrack() -> SearchViewModel.Cell?
     func moveForwardForPreviousTrack() -> SearchViewModel.Cell?
 }
@@ -40,7 +40,7 @@ final class TrackDetailedView: UIView {
         return avplayer
     }()
     
-    weak var delegate: TrackMovingDelegate?
+    var delegate: TrackMovingDelegate?
     weak var tabBarDelegate: MainTabBarDelegate?
     
     let imageScale: CGFloat = 0.8
