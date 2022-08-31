@@ -21,6 +21,7 @@
 
 ## About
 - UIKit, SwiftUI
+- AVKit
 - Interface Builder: Storyboard, XIB, programmatically designed UI with NSLayoutConstraints
 - ITunes API for music data
 - Clean Swift architecture
